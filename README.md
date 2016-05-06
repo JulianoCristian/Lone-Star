@@ -1,3 +1,3 @@
 # Lone-Star
 gametech game
-yay
+yay!
