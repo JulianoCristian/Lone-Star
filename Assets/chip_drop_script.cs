@@ -3,23 +3,31 @@ using System.Collections;
 
 public class chip_drop_script : MonoBehaviour {
 
-    public GameObject pool;
+    private GameObject chip_pool;
 
-    private float timer = 1;
+    private bool spawnable = false;
+    private bool loaded = false;
+
 	void Start () {
-	
+        loaded = true;
+        spawnable = true;
+        chip_pool = GameObject.FindGameObjectWithTag("chip_pool");
 	}
 
-
-    void OnDisable(){
-        if(timer < 0)
-            Instantiate(pool, transform.position, transform.rotation);
+    void OnEnable(){
+        if(loaded)
+            spawnable = true;
     }
 
-	
-	// Update is called once per frame
-	void Update () {
-        timer = timer - Time.deltaTime;
-	
-	}
+    void OnDisable(){
+        if(spawnable && loaded){
+            GameObject chip = chip_pool.GetComponent<object_pooler>().get_pooled_object();
+            if(chip == null) return;
+
+            chip.transform.position = transform.position;
+            chip.transform.rotation = transform.rotation;
+            chip.SetActive(true);
+            spawnable = false;
+        }
+    }
 }

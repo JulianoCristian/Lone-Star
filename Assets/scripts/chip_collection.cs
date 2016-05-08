@@ -21,7 +21,6 @@ public class chip_collection : MonoBehaviour {
 	
     void OnTriggerEnter(Collider col) {
         if(col.gameObject.tag == "chip"){
-            Destroy(col.gameObject);
             chip_count = chip_count + 1;
         }
     }

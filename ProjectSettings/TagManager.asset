@@ -9,6 +9,7 @@ TagManager:
   - bullet
   - enemy
   - bullet_spawner
+  - chip_pool
   layers:
   - Default
   - TransparentFX
