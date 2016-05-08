@@ -4,14 +4,19 @@ using System.Collections;
 
 public class destroy : MonoBehaviour {
 
-	public float distroy_time;
-	// Use this for initialization
-	void Start () {
-		Destroy(gameObject, distroy_time);
-	}
+	public float destroy_time = 5f;
 	
-	// Update is called once per frame
-	void Update () {
-	
+	void OnEnable(){
+		Invoke("Destroy", destroy_time);
 	}
+
+	void Destroy(){
+		gameObject.SetActive(false);
+	}
+
+	void OnDisable(){
+		CancelInvoke();
+	}
+
+
 }

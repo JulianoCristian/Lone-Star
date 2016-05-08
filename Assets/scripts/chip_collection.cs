@@ -12,12 +12,14 @@ public class chip_collection : MonoBehaviour {
 
     void Start () {
         chip_count = 0;
+        first_upgrade = 3;
+        second_upgrade = 6;
         gun_one = transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
         gun_two = transform.GetChild(0).gameObject.transform.GetChild(1).gameObject;
         gun_three = transform.GetChild(0).gameObject.transform.GetChild(2).gameObject;
     }
 	
-    void OnCollisionEnter(Collision col) {
+    void OnTriggerEnter(Collider col) {
         if(col.gameObject.tag == "chip"){
             Destroy(col.gameObject);
             chip_count = chip_count + 1;
@@ -25,7 +27,6 @@ public class chip_collection : MonoBehaviour {
     }
 	// Update is called once per frame
 	void Update () {
-        print(chip_count);
         if(chip_count >= first_upgrade && chip_count < second_upgrade){
             gun_one.SetActive(false);
             gun_two.SetActive(true);
