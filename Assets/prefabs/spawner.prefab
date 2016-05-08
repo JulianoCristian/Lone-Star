@@ -1,47 +1,47 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &180598
+--- !u!1 &113890
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 407288}
-  - 114: {fileID: 11478496}
+  - 4: {fileID: 484208}
+  - 114: {fileID: 11455738}
   m_Layer: 0
-  m_Name: object_pooler
+  m_Name: spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &407288
+--- !u!4 &484208
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 180598}
+  m_GameObject: {fileID: 113890}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.9439532, y: 31.139013, z: -7.8699603}
+  m_LocalPosition: {x: -2.1590195, y: 22.850883, z: -11.924356}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11478496
+--- !u!114 &11455738
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 180598}
+  m_GameObject: {fileID: 113890}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1905978c2f4a4d841b480f93965afc2e, type: 3}
+  m_Script: {fileID: 11500000, guid: e18e53f8770938a49a79f59237e39d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pool_obj: {fileID: 0}
-  pool_size: 100
-  can_grow: 1
+  spawn_amount: 10
+  pool: {fileID: 0}
+  spawn_interval: 10
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -51,5 +51,5 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 180598}
+  m_RootGameObject: {fileID: 113890}
   m_IsPrefabParent: 1

@@ -38,4 +38,9 @@ public class object_pooler : MonoBehaviour {
         }
         return null;
     }
+
+    public List<GameObject> get_pool()
+    {
+        return pool;
+    }
 }
