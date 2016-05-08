@@ -9,6 +9,7 @@ public class shoot : MonoBehaviour {
 
 	public float fire_speed = 20;
     public float fire_interval = 1;
+    public GameObject pool;
 	private float fire_interval_time;
 
     void Start(){
@@ -19,7 +20,7 @@ public class shoot : MonoBehaviour {
 		if(Input.GetButton("Fire1")){
 			if(fire_interval_time <= 0){
                 for(int i = 0; i < spawn_positions.Length; i++){
-                    GameObject bullet = object_pooler.current.get_pooled_object();
+                    GameObject bullet = pool.GetComponent<object_pooler>().get_pooled_object();
                     if(bullet == null) return;
 
                     bullet.transform.position = spawn_positions[i].position;
