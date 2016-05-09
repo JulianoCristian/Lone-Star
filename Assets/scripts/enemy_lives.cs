@@ -17,19 +17,11 @@ public class enemy_lives : MonoBehaviour {
 
 	}
 
-    IEnumerator fade_sound(){
-        float t = fade_time;
-        while(t > 0){
-            yield return null;
-            t -= Time.deltaTime;
-            death_sound.volume = t;
-        }
-        yield break;
-    }
-
     void OnEnable(){
         life = life_total;
         dead = false;
+        GetComponent<MeshRenderer>().enabled = true;
+        GetComponent<collision_detection>().enabled = true;
     }
 
     public void life_subtract(){
@@ -40,7 +32,8 @@ public class enemy_lives : MonoBehaviour {
         if(life <= 0 && !dead){
             dead = true;
             death_sound.Play();
-            //StartCoroutine(fade_sound());
+            GetComponent<MeshRenderer>().enabled = false;
+            GetComponent<collision_detection>().enabled = false;
         }
         if(dead && !death_sound.isPlaying){
             gameObject.SetActive(false);

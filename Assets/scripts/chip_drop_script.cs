@@ -18,9 +18,9 @@ public class chip_drop_script : MonoBehaviour {
         if(loaded)
             spawnable = true;
     }
-
-    void OnDisable(){
-        if(spawnable && loaded){
+    
+    void Update(){
+        if(!GetComponent<MeshRenderer>().enabled && spawnable){
             GameObject chip = chip_pool.GetComponent<object_pooler>().get_pooled_object();
             if(chip == null) return;
 

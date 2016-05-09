@@ -10,6 +10,8 @@ TagManager:
   - enemy
   - bullet_spawner
   - chip_pool
+  - enemy_bullet_pool
+  - player_collision
   layers:
   - Default
   - TransparentFX
