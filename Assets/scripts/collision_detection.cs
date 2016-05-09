@@ -34,7 +34,7 @@ public class collision_detection : MonoBehaviour {
                 if (collision(r, 0.0f, .03f))
                 {
                     bullet.SetActive(false);
-                    gameObject.SetActive(false);
+                    gameObject.GetComponent<enemy_lives>().life_subtract();
                 }
             }
         }
