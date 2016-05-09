@@ -14,7 +14,10 @@ public class collision_detection : MonoBehaviour {
         rend = GetComponent<Renderer>();
         min_point = rend.bounds.min;
         max_point = rend.bounds.max;
-        bullet_pool = GameObject.FindGameObjectWithTag("bullet_spawner");
+        if (gameObject.tag == "player_collision")
+            bullet_pool = GameObject.FindGameObjectWithTag("enemy_bullet_pool");
+        else
+            bullet_pool = GameObject.FindGameObjectWithTag("bullet_spawner");
     }
 
 	void Update () {
@@ -27,14 +30,24 @@ public class collision_detection : MonoBehaviour {
         List<GameObject> pool = bullet_pool.GetComponent<object_pooler>().get_pool();
         foreach (GameObject bullet in pool)
         {
-            if(bullet.activeInHierarchy){
+            if(bullet.activeSelf){
                 Vector3 origin = bullet.GetComponent<bullet_collision>().ray_origin;
                 Vector3 dir = bullet.GetComponent<bullet_collision>().ray_direction;
                 Ray r = new Ray(origin, dir);
                 if (collision(r, 0.0f, .03f))
                 {
-                    bullet.SetActive(false);
-                    gameObject.GetComponent<enemy_lives>().life_subtract();
+                    //need to set ray origin and direction back to zero
+                    //to keep from phantom bullets hitting enemies
+                    bullet.GetComponent<bullet_collision>().ray_origin = Vector3.zero;
+                    bullet.GetComponent<bullet_collision>().ray_direction = Vector3.zero;
+
+                    if (gameObject.tag == "player_collision") {
+                        print("I'm Dead");
+                    }
+                    else {
+                        bullet.SetActive(false);
+                        gameObject.GetComponent<enemy_lives>().life_subtract();
+                    }
                 }
             }
         }
