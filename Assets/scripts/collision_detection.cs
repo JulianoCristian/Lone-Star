@@ -11,7 +11,7 @@ public class collision_detection : MonoBehaviour {
     private GameObject bullet_pool;
 
     void Start () {
-        rend = GetComponent<Renderer>();
+        rend = GetComponentInChildren<Renderer>();
         min_point = rend.bounds.min;
         max_point = rend.bounds.max;
         if (gameObject.tag == "player_collision")

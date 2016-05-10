@@ -23,6 +23,11 @@ public class enemy_movement : MonoBehaviour {
         Vector3 velocity = direction_to_target * speed;
         
         body.AddForce(velocity);
+
+        Vector3 target_dir = target.position - transform.position;
+        float step = speed * Time.deltaTime;
+        Vector3 new_dir = Vector3.RotateTowards(transform.forward, target_dir, step, 0.0f);
+        transform.rotation = Quaternion.LookRotation(new_dir);
         //transform.Translate(velocity * Time.deltaTime);
-	}
+    }
 }

@@ -17,10 +17,28 @@ public class enemy_lives : MonoBehaviour {
 
 	}
 
-    void OnEnable(){
+    void OnEnable()
+    {
         life = life_total;
         dead = false;
-        GetComponent<MeshRenderer>().enabled = true;
+
+        if (gameObject.name.Contains("Rotate_Object")) {
+            transform.parent.parent.parent.Find("GunPlat_1").GetComponent<MeshRenderer>().enabled = true;
+            transform.parent.Find("Gun_2").GetComponent<SkinnedMeshRenderer>().enabled = true;
+        }
+        else if(gameObject.name.Contains("Enemy_new")) {
+            transform.Find("PA_Drone").gameObject.SetActive(true);
+        }
+        else if(gameObject.name.Contains("enemy_ground_swarm_new")) {
+            transform.Find("PA_Warrior").GetComponent<SkinnedMeshRenderer>().enabled = true;
+        }
+        else if(gameObject.name.Contains("enemyC_new")) {
+            GetComponentInChildren<MeshRenderer>().enabled = true;
+        }
+        else {
+            GetComponent<MeshRenderer>().enabled = true;
+        }
+
         GetComponent<collision_detection>().enabled = true;
     }
 
@@ -32,11 +50,31 @@ public class enemy_lives : MonoBehaviour {
         if(life <= 0 && !dead){
             dead = true;
             death_sound.Play();
-            GetComponent<MeshRenderer>().enabled = false;
+
+            if (gameObject.name.Contains( "Rotate_Object")) {
+                transform.parent.parent.parent.Find("GunPlat_1").GetComponent<MeshRenderer>().enabled = false;
+                transform.parent.Find("Gun_2").GetComponent<SkinnedMeshRenderer>().enabled = false;
+            }
+            else if (gameObject.name.Contains( "Enemy_new")) {
+                transform.Find("PA_Drone").gameObject.SetActive(false);
+            }
+            else if (gameObject.name.Contains( "enemy_ground_swarm_new")) {
+                transform.Find("PA_Warrior").GetComponent<SkinnedMeshRenderer>().enabled = false;
+            }
+            else if (gameObject.name.Contains( "enemyC_new")) {
+                GetComponentInChildren<MeshRenderer>().enabled = false;
+            }
+            else {
+                GetComponent<MeshRenderer>().enabled = false;
+            }
+
             GetComponent<collision_detection>().enabled = false;
         }
         if(dead && !death_sound.isPlaying){
-            gameObject.SetActive(false);
+            if (transform.parent != null)
+                transform.parent.parent.parent.gameObject.SetActive(false);
+            else
+                gameObject.SetActive(false);
         }
 	}
 }
