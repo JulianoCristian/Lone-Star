@@ -42,7 +42,7 @@ public class enemy_lives : MonoBehaviour {
             transform.Find("PA_Warrior").GetComponent<SkinnedMeshRenderer>().enabled = true;
         }
         else if(gameObject.name.Contains("enemyC_new")) {
-            GetComponentInChildren<MeshRenderer>().enabled = true;
+            transform.Find("MeshContainer").gameObject.SetActive(true);
         }
         else {
             GetComponent<MeshRenderer>().enabled = true;
@@ -72,7 +72,7 @@ public class enemy_lives : MonoBehaviour {
                 transform.Find("PA_Warrior").GetComponent<SkinnedMeshRenderer>().enabled = false;
             }
             else if (gameObject.name.Contains( "enemyC_new")) {
-                GetComponentInChildren<MeshRenderer>().enabled = false;
+                transform.Find("MeshContainer").gameObject.SetActive(false);
             }
             else {
                 GetComponent<MeshRenderer>().enabled = false;

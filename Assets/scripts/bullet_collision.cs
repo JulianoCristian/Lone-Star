@@ -13,5 +13,6 @@ public class bullet_collision : MonoBehaviour {
         //starting and end point of ray
         ray_origin = transform.position;
         ray_direction = transform.TransformDirection(Vector3.forward) * .10f;
+        Debug.DrawRay(ray_origin, ray_direction, Color.red);
 	}
 }

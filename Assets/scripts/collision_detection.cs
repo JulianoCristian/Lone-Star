@@ -10,6 +10,8 @@ public class collision_detection : MonoBehaviour {
     private float txmin, txmax, tymin, tymax, tzmin, tzmax;
     private GameObject bullet_pool;
 
+   
+
     void Start () {
         rend = GetComponentInChildren<Renderer>();
         min_point = rend.bounds.min;
