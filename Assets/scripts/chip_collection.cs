@@ -16,8 +16,6 @@ public class chip_collection : MonoBehaviour {
 
     void Start () {
         chip_count = 0;
-        first_upgrade = 3;
-        second_upgrade = 6;
         gun_one = transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
         gun_two = transform.GetChild(0).gameObject.transform.GetChild(1).gameObject;
         gun_three = transform.GetChild(0).gameObject.transform.GetChild(2).gameObject;
@@ -28,7 +26,7 @@ public class chip_collection : MonoBehaviour {
     }
 	
     void OnTriggerEnter(Collider col) {
-        if(col.gameObject.tag == "chip"){
+        if(col.gameObject.tag == "chip" && chip_count < second_upgrade){
             chip_count = chip_count + 1;
             if(chip_count != first_upgrade && chip_count != second_upgrade)
                 chip_sound.Play();  

@@ -3,22 +3,29 @@ using System.Collections;
 
 public class death : MonoBehaviour {
 
-	// Use this for initialization
+	private AudioSource death_sound;
+	private bool dead;
+
 	void Start () {
-	
+        AudioSource[] allMyAudioSources = GetComponents<AudioSource>();
+    	death_sound = allMyAudioSources[3];
+    	dead = false;
 	}
 	
 
     void OnTriggerEnter(Collider col) {
-        if(col.gameObject.tag == "enemy"){
-			print("i am dead");
+        if(col.gameObject.tag == "enemy" && !dead){
+			death_sound.Play();
+			dead = true;
+			print("dead");
         }
     }
 
-	// Update is called once per frame
 	void Update () {
-		if(transform.position.y < 10){
-			print("i am dead");
+		if(transform.position.y < 10 && !dead){
+			print("dead");
+			death_sound.Play();
+			dead = true;
 		}
 	}
 }
