@@ -8,15 +8,16 @@ public class stationary_enemy_spawner : MonoBehaviour {
 
     private float timer;
 
-    void Start() {
+    void Start()
+    {
         timer = respawn_time;
     }
-	
-	void Update () {
 
+    void Update()
+    {
         if (!child.activeSelf) {
             timer = timer - Time.deltaTime;
-            if (timer < 0) {
+            if (timer < 0) { 
                 timer = respawn_time;
                 child.SetActive(true);
             }

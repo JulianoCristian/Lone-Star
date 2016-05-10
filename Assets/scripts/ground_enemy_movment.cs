@@ -7,7 +7,8 @@ public enum Type
     range
 }
 
-public class ground_enemy_movment : MonoBehaviour {
+public class ground_enemy_movment : MonoBehaviour
+{
 
     public Type type;
     public float speed = 15.0f;
@@ -17,6 +18,7 @@ public class ground_enemy_movment : MonoBehaviour {
     public float fire_rate = 3.0f;
     public Transform spawn_position;
     public GameObject pool;
+    public Transform pivot;
 
     private float fire_interval_time;
     private Transform target;
@@ -24,14 +26,17 @@ public class ground_enemy_movment : MonoBehaviour {
     private Vector3 heading;
     private Vector3 desired_velocity;
 
-	void Start () {
+    void Start()
+    {
         target = GameObject.FindGameObjectWithTag("Player").transform;
         pool = GameObject.FindGameObjectWithTag("enemy_bullet_pool");
         body = GetComponent<Rigidbody>();
+        pivot = transform;
         fire_interval_time = fire_rate;
-	}
-	
-	void Update () {
+    }
+
+    void Update()
+    {
 
         heading = Vector3.Normalize(body.velocity);
 
@@ -43,14 +48,16 @@ public class ground_enemy_movment : MonoBehaviour {
         face_player();
     }
 
-    void swarm_update() {
+    void swarm_update()
+    {
         Vector3 to_target = target.position - transform.position;
         Vector3 target_heading = Vector3.Normalize(target.GetComponent<Rigidbody>().velocity);
         float relative_heading = Vector3.Dot(heading, target_heading);
 
         if (Vector3.Dot(to_target, target_heading) > 0 && (relative_heading < -0.95))
             desired_velocity = seek(target.position);
-        else {
+        else
+        {
 
             float look_ahead_time = to_target.magnitude / (speed + target.GetComponent<Rigidbody>().velocity.magnitude);
             look_ahead_time += turn_around_time();
@@ -60,7 +67,8 @@ public class ground_enemy_movment : MonoBehaviour {
         body.AddForce(desired_velocity);
     }
 
-    void range_update() {
+    void range_update()
+    {
         Vector3 firing_direction = Vector3.zero;
         Vector3 bullet_initial_pos = spawn_position.position;
         Vector3 target_initial_pos = target.position;
@@ -78,15 +86,17 @@ public class ground_enemy_movment : MonoBehaviour {
         float t_minus = (-b - Mathf.Sqrt(Mathf.Pow(b, 2.0f) - 4.0f * a * c)) / (2.0f * a);
 
         float actual_t;
-        
+
         //checking for negative values and discarding them
-        if (t_plus < 0 || t_minus < 0) {
-            if(t_plus < 0)
+        if (t_plus < 0 || t_minus < 0)
+        {
+            if (t_plus < 0)
                 actual_t = t_minus;
             else
                 actual_t = t_plus;
         }
-        else {
+        else
+        {
             //both are positve, so pick the smallest one
             if (t_plus < t_minus)
                 actual_t = t_plus;
@@ -98,12 +108,13 @@ public class ground_enemy_movment : MonoBehaviour {
 
         //rotate towards firing direction
         transform.rotation = Quaternion.LookRotation(firing_direction);
-        if(fire_interval_time <= 0)
+        if (fire_interval_time <= 0)
             shoot();
         fire_interval_time -= Time.deltaTime * (float)fire_speed;
     }
 
-    void shoot() {
+    void shoot()
+    {
         GameObject bullet = pool.GetComponent<object_pooler>().get_pooled_object();
         if (bullet == null)
             return;
@@ -116,23 +127,25 @@ public class ground_enemy_movment : MonoBehaviour {
         fire_interval_time = fire_rate;
     }
 
-    float turn_around_time() {
+    float turn_around_time()
+    {
         Vector3 to_target = Vector3.Normalize(target.position - transform.position);
         float dot = Vector3.Dot(heading, to_target);
         float coefficient = 0.5f;
         return (dot - 1.0f) * -coefficient;
     }
 
-    void face_player() {
-        Vector3 target_dir = target.position - transform.position;
+    void face_player()
+    {
+        Vector3 target_dir = target.position - pivot.position;
         float step = speed * Time.deltaTime;
         Vector3 new_dir = Vector3.RotateTowards(transform.forward, target_dir, step, 0.0f);
-        transform.rotation = Quaternion.LookRotation(new_dir);
+        pivot.rotation = Quaternion.LookRotation(new_dir);
     }
 
     Vector3 seek(Vector3 target_pos)
     {
         Vector3 des_vel = Vector3.Normalize(target_pos - transform.position) * speed;
-        return (des_vel - body.velocity); 
+        return (des_vel - body.velocity);
     }
 }
