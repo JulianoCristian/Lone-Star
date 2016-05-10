@@ -14,10 +14,11 @@ public class death : MonoBehaviour {
 	
 
     void OnTriggerEnter(Collider col) {
-        if(col.gameObject.tag == "enemy" && !dead){
+		if(col.gameObject.tag == "enemy" && !dead){
 			death_sound.Play();
 			dead = true;
 			print("dead");
+			transform.rotation = new Quaternion(0, 0, 90, 1); 
         }
     }
 

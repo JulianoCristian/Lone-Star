@@ -10,6 +10,15 @@ public class enemy_lives : MonoBehaviour {
     private AudioSource death_sound;
     public float fade_time;
 
+
+    public bool is_dead(){
+        return dead;
+    }
+
+    public bool sound_playing(){
+        return death_sound.isPlaying;
+    }
+
 	void Start () {
         death_sound = GetComponent<AudioSource>();
 	    life = life_total;
@@ -40,13 +49,14 @@ public class enemy_lives : MonoBehaviour {
         }
 
         GetComponent<collision_detection>().enabled = true;
+        GetComponent<BoxCollider>().enabled = true;
     }
 
     public void life_subtract(){
         life = life - 1;
     }
-	
-	void Update () {
+    
+    void Update () {
         if(life <= 0 && !dead){
             dead = true;
             death_sound.Play();
@@ -69,6 +79,7 @@ public class enemy_lives : MonoBehaviour {
             }
 
             GetComponent<collision_detection>().enabled = false;
+            GetComponent<BoxCollider>().enabled = false;
         }
         if(dead && !death_sound.isPlaying){
             if (transform.parent != null)

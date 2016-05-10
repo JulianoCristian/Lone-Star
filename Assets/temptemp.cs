@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class temp : MonoBehaviour {
+public class temptemp : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
