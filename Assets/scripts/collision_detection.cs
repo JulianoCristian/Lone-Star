@@ -4,13 +4,13 @@ using System.Collections.Generic;
 
 public class collision_detection : MonoBehaviour {
     public Renderer rend;
+    public death player;
+    public Canvas game_over_menu;
 
     private Vector3 min_point; // bounds[0]
     private Vector3 max_point; // bounds[1]
     private float txmin, txmax, tymin, tymax, tzmin, tzmax;
     private GameObject bullet_pool;
-
-   
 
     void Start () {
         rend = GetComponentInChildren<Renderer>();
@@ -44,7 +44,9 @@ public class collision_detection : MonoBehaviour {
                     bullet.GetComponent<bullet_collision>().ray_direction = Vector3.zero;
 
                     if (gameObject.tag == "player_collision") {
-                        print("I'm Dead");
+                        player.set_death(true);
+                        game_over_menu.enabled = true;
+                        player.get_death_sound().Play();
                     }
                     else {
                         bullet.SetActive(false);

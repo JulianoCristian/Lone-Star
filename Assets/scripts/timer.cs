@@ -17,4 +17,8 @@ public class timer : MonoBehaviour {
         total_time = total_time + Time.deltaTime;
 	    timer_text.text = "Timer: " + total_time.ToString("#.00");
 	}
+
+    public float get_total_time() {
+        return total_time;
+    }
 }

@@ -49,7 +49,8 @@ public class enemy_lives : MonoBehaviour {
         }
 
         GetComponent<collision_detection>().enabled = true;
-        GetComponent<BoxCollider>().enabled = true;
+        if(GetComponent<BoxCollider>())
+            GetComponent<BoxCollider>().enabled = true;
     }
 
     public void life_subtract(){
@@ -79,7 +80,8 @@ public class enemy_lives : MonoBehaviour {
             }
 
             GetComponent<collision_detection>().enabled = false;
-            GetComponent<BoxCollider>().enabled = false;
+            if (GetComponent<BoxCollider>())
+                GetComponent<BoxCollider>().enabled = false;
         }
         if(dead && !death_sound.isPlaying){
             if (transform.parent != null)

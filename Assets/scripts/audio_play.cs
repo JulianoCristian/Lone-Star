@@ -5,12 +5,14 @@ public class audio_play : MonoBehaviour {
 
 
     private AudioSource fire_sound;
+    private bool pause_state;
+    private bool death_state;
     public float fade_time;
 
 	void Start () {
         fire_sound = GetComponent<AudioSource>();
         fade_time = 0.3f;
-	}
+    }
 	
     IEnumerator fade_sound(){
         float t = fade_time;
@@ -23,14 +25,32 @@ public class audio_play : MonoBehaviour {
     }
 
 	void Update () {
-        if(Input.GetButton("Fire1")){
+
+        pause_state = GameObject.FindGameObjectWithTag("PauseMenu").GetComponent<pauseMenu>().pauseState;
+        death_state = GameObject.FindGameObjectWithTag("GameOverMenu").GetComponent<gameOver>().death_state;
+
+        print(pause_state);
+
+        if(Input.GetButton("Fire1") && (pause_state || death_state)) {
+            if (fire_sound.isPlaying)
+                fire_sound.Stop();
+        }
+
+        if (!Input.GetButton("Fire1") && (pause_state || death_state))
+        {
+            if (fire_sound.isPlaying)
+                fire_sound.Stop();
+        }
+
+        if (Input.GetButton("Fire1") && (!pause_state && !death_state)){
             StopCoroutine(fade_sound());
             fire_sound.volume = fade_time;
             if(!fire_sound.isPlaying){
                 fire_sound.Play();
             }
         }
-        if(Input.GetButtonUp("Fire1")){
+        if(Input.GetButtonUp("Fire1") && (!pause_state && !death_state))
+        {
             StartCoroutine(fade_sound());
             fire_sound.volume = fade_time;
         }

@@ -12,6 +12,9 @@ TagManager:
   - chip_pool
   - enemy_bullet_pool
   - player_collision
+  - pivot
+  - PauseMenu
+  - GameOverMenu
   layers:
   - Default
   - TransparentFX
