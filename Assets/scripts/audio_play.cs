@@ -29,7 +29,6 @@ public class audio_play : MonoBehaviour {
         pause_state = GameObject.FindGameObjectWithTag("PauseMenu").GetComponent<pauseMenu>().pauseState;
         death_state = GameObject.FindGameObjectWithTag("GameOverMenu").GetComponent<gameOver>().death_state;
 
-        print(pause_state);
 
         if(Input.GetButton("Fire1") && (pause_state || death_state)) {
             if (fire_sound.isPlaying)

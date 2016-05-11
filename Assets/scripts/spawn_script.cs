@@ -12,7 +12,7 @@ public class spawn_script : MonoBehaviour {
 
 	// Use this for initialization
 	void Start (){
-        timer = spawn_interval;
+        timer = 0;
 	
 	}
 	

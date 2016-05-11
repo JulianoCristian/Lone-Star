@@ -34,15 +34,15 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 178046}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e18e53f8770938a49a79f59237e39d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawn_amount: 1
+  spawn_amount: 4
   pool: {fileID: 0}
-  spawn_interval: 6
-  start_time: 10
+  spawn_interval: 8
+  start_time: 20
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
