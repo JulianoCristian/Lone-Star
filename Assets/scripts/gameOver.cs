@@ -17,6 +17,10 @@ public class gameOver : MonoBehaviour {
     private AudioSource new_game_sound;
     private AudioSource quit_sound;
 
+    public bool get_death_state(){
+    	return death_state;
+    }
+
 	void Start () {
         gameOverMenu1 = gameOverMenu1.GetComponent<Canvas> ();
 		startText = startText.GetComponent<Button> ();

@@ -8,6 +8,10 @@ public class death : MonoBehaviour {
 
     public Canvas game_over_menu;
 
+    public bool get_death_state(){
+        return dead;
+    }
+
 	void Start () {
         AudioSource[] allMyAudioSources = GetComponents<AudioSource>();
     	death_sound = allMyAudioSources[3];
@@ -19,7 +23,6 @@ public class death : MonoBehaviour {
             game_over_menu.enabled = true;
             death_sound.Play();
 			dead = true;
-			print("dead");
 			transform.rotation = new Quaternion(0, 0, 90, 1); 
         }
     }
@@ -27,7 +30,6 @@ public class death : MonoBehaviour {
 	void Update () {
 		if(transform.position.y < 10 && !dead){
             game_over_menu.enabled = true;
-            print("dead");
 			death_sound.Play();
 			dead = true;
 		}

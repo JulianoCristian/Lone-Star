@@ -28,7 +28,7 @@ public class cursor_controller : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         dead = player.is_dead();
-	    if(Input.GetButtonDown("Cancel")){
+	    if(Input.GetButtonDown("Cancel") && !dead){
             curser_lock();
         }
 

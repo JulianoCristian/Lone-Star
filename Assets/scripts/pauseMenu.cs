@@ -16,6 +16,10 @@ public class pauseMenu : MonoBehaviour {
    		private AudioSource quit_sound;
    		private AudioSource menu_sound;
 
+   		public bool get_pause_state(){
+   			return pauseState;
+   		}
+
 		void Start () {
 			pauseMenu1 = pauseMenu1.GetComponent<Canvas> ();
 			startText = startText.GetComponent<Button> ();
