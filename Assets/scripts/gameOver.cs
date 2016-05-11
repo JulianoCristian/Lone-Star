@@ -16,6 +16,7 @@ public class gameOver : MonoBehaviour {
 
     private AudioSource new_game_sound;
     private AudioSource quit_sound;
+    private AudioSource pointer_enter_sound;
 
     public bool get_death_state(){
     	return death_state;
@@ -33,6 +34,7 @@ public class gameOver : MonoBehaviour {
         AudioSource[] allMyAudioSources = GetComponents<AudioSource>();
     	new_game_sound = allMyAudioSources[0];
     	quit_sound = allMyAudioSources[1];
+        pointer_enter_sound = allMyAudioSources[2];
 
 	}
 	void Update (){
@@ -63,6 +65,12 @@ public class gameOver : MonoBehaviour {
 	    }
 		Application.Quit();
 	    yield break;
+    }
+
+    public void pointer_enter(){
+        if(!pointer_enter_sound.isPlaying){
+            pointer_enter_sound.Play();
+        }
     }
 
 	public void StartPress(){

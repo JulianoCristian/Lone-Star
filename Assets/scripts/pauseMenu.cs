@@ -15,6 +15,7 @@ public class pauseMenu : MonoBehaviour {
 		private AudioSource new_game_sound;
    		private AudioSource quit_sound;
    		private AudioSource menu_sound;
+   		private AudioSource pointer_enter_sound;
 
    		public bool get_pause_state(){
    			return pauseState;
@@ -34,6 +35,7 @@ public class pauseMenu : MonoBehaviour {
     		new_game_sound = allMyAudioSources[0];
     		quit_sound = allMyAudioSources[1];
     		menu_sound = allMyAudioSources[2];
+    		pointer_enter_sound = allMyAudioSources[3];
 		}
 
 		// Update is called once per frame
@@ -76,6 +78,12 @@ public class pauseMenu : MonoBehaviour {
 	        yield break;
     	}
 
+    	public void pointer_enter(){
+ 			if(!pointer_enter_sound.isPlaying){
+ 				pointer_enter_sound.Play();
+ 			}
+ 		}
+
 		public void StartPress(){
 			Cursor.visible = false;
 			StartCoroutine(play_new_game_sound());
@@ -83,7 +91,6 @@ public class pauseMenu : MonoBehaviour {
 
 		public void ExitPress(){
 			quit_sound.Play();
-			Debug.Log ("Game Exited");
 			StartCoroutine(play_quit_sound());
 		}
 

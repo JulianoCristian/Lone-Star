@@ -14,6 +14,7 @@ public class mainMenu : MonoBehaviour {
 
 	private AudioSource new_game_sound;
     private AudioSource quit_sound;
+    private AudioSource pointer_enter_sound;
 
 	void Start () {
 	
@@ -26,7 +27,7 @@ public class mainMenu : MonoBehaviour {
 		AudioSource[] allMyAudioSources = GetComponents<AudioSource>();
     	new_game_sound = allMyAudioSources[0];
     	quit_sound = allMyAudioSources[1];
-
+    	pointer_enter_sound = allMyAudioSources[2];
 	}
 
 
@@ -49,18 +50,24 @@ public class mainMenu : MonoBehaviour {
 	    yield break;
     }
 
+    void OnMouseEnter(){
+ 		print("ON");
+ 	}
+
+ 	public void pointer_enter(){
+ 		if(!pointer_enter_sound.isPlaying){
+ 			pointer_enter_sound.Play();
+ 		}
+ 	}
 
 	public void StartPress(){
 		Cursor.visible = false;
 		mainMenu1.enabled = false;
 		StartCoroutine(play_new_game_sound());
-
 	}
 
 	public void ExitPress(){
 		Debug.Log ("Game Exited");
 		StartCoroutine(play_quit_sound());
 	}
-		
-
 }
